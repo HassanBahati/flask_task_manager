@@ -9,6 +9,11 @@
 {%block body %} 
 <div class="content p-5 m-5">
     <h1 class="text-center">Task Master</h1>
+   
+    <!-- if there are 0 tasks , show this text  -->
+    {% if tasks|length < 1 %}
+    <h4 class="text-center">There are no tasks. Create one below!</h4>
+    {% else %} 
 
     <table class="table">
         <tr>
@@ -28,6 +33,7 @@
             </tr>
         {% endfor %}
     </table>
+    {% endif %}
 
     <form class="form  flex-right" action="/" method="POST">
         <input class="" type="text" name="content" id="content">
