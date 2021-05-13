@@ -34,9 +34,12 @@ def index():
             db.session.commit()
             return redirect('/')
         except:
-            return 'There was an issue saving data to db'
+            return 'There was an issue saving task to db'
     else:
-        return render_template('index.html')
+        # look through db and return all according to time created 
+        tasks = Todo.query.order_by(Todo.date_created).all()
+        return render_template('index.html', tasks = tasks)
+        
 
 if __name__ == '__main__':
     app.run(debug=True)  
