@@ -1,5 +1,5 @@
 #imports 
-from flask import Flask , render_template, url_for, request
+from flask import Flask , render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy 
 from datetime import datetime
 
@@ -27,7 +27,14 @@ def index():
         task_content = request.form['content']
         #todo object (model for contennt task)
         new_task = Todo(content=task_content)
-        
+
+        #logic for adding new todo to db
+        try:
+            db.session.add(new_task)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was an issue saving data to db'
     else:
         return render_template('index.html')
 
