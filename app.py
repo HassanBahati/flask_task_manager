@@ -39,7 +39,20 @@ def index():
         # look through db and return all according to time created 
         tasks = Todo.query.order_by(Todo.date_created).all()
         return render_template('index.html', tasks = tasks)
-        
+
+
+# route for update and delete
+@app.route('/delete/<int:id>')
+def delete(id):
+    # attemp to look for id if doesnt exist do 404 
+    task_to_delete = Todo.query.get_or_404(id)
+
+    try:
+        db.session.delete(task_to_delete)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was an error deleting the task'
 
 if __name__ == '__main__':
     app.run(debug=True)  
