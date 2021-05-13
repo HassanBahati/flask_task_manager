@@ -41,7 +41,7 @@ def index():
         return render_template('index.html', tasks = tasks)
 
 
-# route for update and delete
+# route for deleting task
 @app.route('/delete/<int:id>')
 def delete(id):
     # attemp to look for id if doesnt exist do 404 
@@ -53,6 +53,12 @@ def delete(id):
         return redirect('/')
     except:
         return 'There was an error deleting the task'
+
+# route for updating task 
+@app.route('/update/<int:id>', methods=['GET','POST'])
+def update(id):
+    return '' 
+
 
 if __name__ == '__main__':
     app.run(debug=True)  
