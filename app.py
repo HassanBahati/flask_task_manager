@@ -1,5 +1,5 @@
 #imports 
-from flask import Flask , render_template, url_for
+from flask import Flask , render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy 
 from datetime import datetime
 
@@ -21,7 +21,15 @@ class Todo(db.Model):
 # route 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    return render_template('index.html')
+    # if the request is a post, submit form else return form 
+    if request.method == 'POST':
+        #logic for adding a task
+        task_content = request.form['content']
+        #todo object (model for contennt task)
+        new_task = Todo(content=task_content)
+        
+    else:
+        return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True)  
