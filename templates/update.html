@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+<!--head template-->
+{%block head %} 
+<title>Task Master</title>
+{%endblock%}
+
+<!-- template body  -->
+{%block body %} 
+<div class="content p-5 m-5">
+    <h1 class="text-center">Update Task</h1>
+
+    <form class="form" action="/update/{{task.id}}" method="POST">
+        <input class="" type="text" name="content" id="content">
+        <input type="submit" value="Update Task">
+    </form>
+</div>
+{%endblock%}
